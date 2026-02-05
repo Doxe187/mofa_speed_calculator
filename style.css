@@ -298,6 +298,111 @@ h1 {
 }
 
 /* ==========================================================================
+   RECOMMENDATIONS
+   ========================================================================== */
+
+.recommendations {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-2xl);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    padding: var(--spacing-lg);
+}
+
+.recommendations-title {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: var(--spacing-md);
+}
+
+.rec-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.rec-card:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.rec-card:first-child {
+    padding-top: 0;
+}
+
+.rec-speed-badge {
+    background: var(--primary-gradient);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.85em;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 82px;
+    text-align: center;
+}
+
+.rec-setups {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rec-setup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    background-color: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+}
+
+.rec-setup-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.rec-setup-details strong {
+    color: #1a1a1a;
+    font-weight: 700;
+}
+
+.rec-apply-btn {
+    background: var(--primary-gradient);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 8px 18px;
+    font-size: 0.88em;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: filter 0.15s ease, transform 0.1s ease;
+}
+
+.rec-apply-btn:hover {
+    filter: brightness(1.1);
+}
+
+.rec-apply-btn:active {
+    transform: scale(0.96);
+}
+
+/* ==========================================================================
    RESPONSIVE DESIGN
    ========================================================================== */
 
@@ -382,6 +487,29 @@ h1 {
 
     .breakdown-total span:last-child {
         font-size: 1.1em;
+    }
+
+    .recommendations {
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    .rec-card {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .rec-setup {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 10px 12px;
+    }
+
+    .rec-apply-btn {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
     }
 }
 
