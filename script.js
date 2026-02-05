@@ -21,32 +21,32 @@ const CARB_LABELS = ['12 mm', '14 mm', '15 mm', '17 mm', '17.5 mm', '19 mm', '19
 const EXHAUST_LABELS = ['18er', '22er', '28er', '28er Reso'];
 
 const RECOMMENDATIONS = [
-    { label: '35 km/h', setups: [
+    { label: '35 km/h', min: 0, max: 37, setups: [
         { cylinder: 'stock', carb: 0, front: 13, rear: 45, exhaust: 1 }
     ]},
-    { label: '40 km/h', setups: [
+    { label: '40 km/h', min: 38, max: 42, setups: [
         { cylinder: '50', carb: 2, front: 12, rear: 45, exhaust: 1 }
     ]},
-    { label: '45 km/h', setups: [
+    { label: '45 km/h', min: 43, max: 47, setups: [
         { cylinder: '50', carb: 2, front: 13, rear: 45, exhaust: 1 }
     ]},
-    { label: '50 km/h', setups: [
+    { label: '50 km/h', min: 48, max: 52, setups: [
         { cylinder: '50', carb: 2, front: 12, rear: 45, exhaust: 2 },
         { cylinder: '65', carb: 2, front: 12, rear: 45, exhaust: 1 }
     ]},
-    { label: '55–60 km/h', setups: [
+    { label: '55–60 km/h', min: 53, max: 62, setups: [
         { cylinder: '50', carb: 2, front: 15, rear: 45, exhaust: 2 },
         { cylinder: '65', carb: 2, front: 12, rear: 45, exhaust: 2 },
         { cylinder: '65', carb: 3, front: 12, rear: 45, exhaust: 2 }
     ]},
-    { label: '65–70 km/h', setups: [
+    { label: '65–70 km/h', min: 63, max: 72, setups: [
         { cylinder: '65', carb: 2, front: 15, rear: 45, exhaust: 2 },
         { cylinder: '65', carb: 3, front: 15, rear: 45, exhaust: 2 }
     ]},
-    { label: '75 km/h', setups: [
+    { label: '75 km/h', min: 73, max: 77, setups: [
         { cylinder: '72', carb: 7, front: 15, rear: 45, exhaust: 2 }
     ]},
-    { label: '80+ km/h', setups: [
+    { label: '80+ km/h', min: 78, max: Infinity, setups: [
         { cylinder: '74', carb: 8, front: 15, rear: 45, exhaust: 2 }
     ]}
 ];
@@ -186,7 +186,30 @@ document.getElementById('recommendations-list').addEventListener('click', (e) =>
     applySetup(RECOMMENDATIONS[cardIdx].setups[setupIdx]);
 });
 
+function findMatchingRec(speed) {
+    return RECOMMENDATIONS.findIndex(rec => speed >= rec.min && speed <= rec.max);
+}
+
+function highlightRec(index) {
+    document.querySelectorAll('.rec-card').forEach((card, i) => {
+        card.classList.toggle('rec-card--active', i === index);
+    });
+}
+
 updateExhaustDefaults();
 updateCarbDefault();
 calculateSpeed();
 renderRecommendations();
+
+document.getElementById('wunschgeschwindigkeit').addEventListener('input', (e) => {
+    const val = parseInt(e.target.value);
+    if (isNaN(val) || val < 0) {
+        highlightRec(-1);
+        return;
+    }
+    const idx = findMatchingRec(val);
+    highlightRec(idx);
+    if (idx >= 0) {
+        document.querySelectorAll('.rec-card')[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+});

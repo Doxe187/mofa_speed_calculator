@@ -325,6 +325,7 @@ h1 {
     gap: var(--spacing-md);
     padding: var(--spacing-md) 0;
     border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
 }
 
 .rec-card:last-child {
@@ -400,6 +401,76 @@ h1 {
 
 .rec-apply-btn:active {
     transform: scale(0.96);
+}
+
+.rec-input-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.rec-input-group label {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.rec-input-wrapper {
+    position: relative;
+    max-width: 200px;
+}
+
+.rec-input-wrapper input {
+    width: 100%;
+    padding: 12px 48px 12px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+    background-color: #fafbfc;
+    transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    -moz-appearance: textfield;
+}
+
+.rec-input-wrapper input::-webkit-outer-spin-button,
+.rec-input-wrapper input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.rec-input-wrapper input:hover {
+    background-color: #fff;
+    border-color: var(--border-color-hover);
+}
+
+.rec-input-wrapper input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.rec-input-unit {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.9em;
+    pointer-events: none;
+}
+
+.rec-card--active {
+    background-color: #eff6ff;
+    border-radius: var(--radius-md);
+}
+
+.rec-card--active .rec-speed-badge {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
 /* ==========================================================================
@@ -510,6 +581,10 @@ h1 {
         width: 100%;
         text-align: center;
         padding: 10px;
+    }
+
+    .rec-input-wrapper {
+        max-width: 100%;
     }
 }
 
