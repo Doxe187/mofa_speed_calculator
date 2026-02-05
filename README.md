@@ -7,16 +7,9 @@ Ein Rechner für die geschätzte Endgeschwindigkeit von Puch Maxi Mofas. Du kann
 ## Installation
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/Doxe187/mofa_speed_calculator.git
 cd mofa_speed_calculator
-```
-
-Öffne `index.html` direkt im Browser — entweder per Doppelklick im Dateimanager oder über einen lokalen Webserver:
-
-```bash
-# Optional: lokaler Server (z. B. mit Python)
-python -m http.server
-# Browser: http://127.0.0.1:8000
+start index.html
 ```
 ---
 
