@@ -21,7 +21,7 @@ const TUNING_RECOMMENDATIONS = {
         ]
     },
     40: {
-        title: "40 km/h",
+        title: "40 km/h - 45km/h",
         description: "Leichte Leistungssteigerung",
         setups: [
             {
@@ -40,7 +40,7 @@ const TUNING_RECOMMENDATIONS = {
         ]
     },
     45: {
-        title: "45 km/h",
+        title: "45 km/h - 50km/h",
         description: "Mittlere Geschwindigkeit",
         setups: [
             {
@@ -59,7 +59,7 @@ const TUNING_RECOMMENDATIONS = {
         ]
     },
     50: {
-        title: "50 km/h",
+        title: "50 km/h - 55km/h",
         description: "Beliebtes Tuning-Ziel",
         setups: [
             {
