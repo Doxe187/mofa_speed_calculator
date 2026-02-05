@@ -14,7 +14,7 @@ const CONFIG = {
     carbMaxIndex70cc: 5,
     exhaustStepBonus: 4,
     exhaustResoIndex: 3,
-    maxCylinderForReso: 65
+    maxCylinderForReso: 60
 };
 
 const CARB_LABELS = ['12 mm', '14 mm', '15 mm', '17 mm', '17.5 mm', '19 mm', '19.5 mm', '21 mm', '24 mm'];

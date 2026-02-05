@@ -15,7 +15,7 @@ const CONFIG = {
     carbMaxIndex70cc: 5,
     exhaustStepBonus: 10,
     exhaustResoIndex: 3,
-    maxCylinderForReso: 65,
+    maxCylinderForReso: 60,
     cylinders: ['stock', '50', '60', '65', '70', '72', '74'],
     frontSprockets: [9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
     rearSprockets: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52]
