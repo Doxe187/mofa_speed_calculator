@@ -144,27 +144,30 @@ elements.zylinder.addEventListener('change', () => {
 [elements.vergaser, elements.vorne, elements.hinten, elements.auspuff]
     .forEach(el => el.addEventListener('change', calculateSpeed));
 
-function renderRecommendations() {
+function renderSetupCard(index) {
     const container = document.getElementById('recommendations-list');
-    container.innerHTML = RECOMMENDATIONS.map((rec, cardIdx) =>
-        `<div class="rec-card">
-            <div class="rec-speed-badge">${rec.label}</div>
-            <div class="rec-setups">
-                ${rec.setups.map((setup, setupIdx) => {
-                    const cylLabel = setup.cylinder === 'stock' ? 'Original 50 ccm' : setup.cylinder + ' ccm';
-                    return `<div class="rec-setup">
-                        <div class="rec-setup-details">
-                            <span>Zylinder: <strong>${cylLabel}</strong></span>
-                            <span>Vergaser: <strong>${CARB_LABELS[setup.carb]}</strong></span>
-                            <span>Übersetzung: <strong>${setup.front}/${setup.rear}</strong></span>
-                            <span>Auspuff: <strong>${EXHAUST_LABELS[setup.exhaust]}</strong></span>
-                        </div>
-                        <button class="rec-apply-btn" data-card="${cardIdx}" data-setup="${setupIdx}">Anwenden</button>
-                    </div>`;
-                }).join('')}
-            </div>
-        </div>`
-    ).join('');
+    if (index < 0) {
+        container.innerHTML = '<p class="rec-placeholder">Geben Sie eine Geschwindigkeit ein</p>';
+        return;
+    }
+    const rec = RECOMMENDATIONS[index];
+    container.innerHTML = `<div class="rec-card">
+        <div class="rec-speed-badge">${rec.label}</div>
+        <div class="rec-setups">
+            ${rec.setups.map((setup, setupIdx) => {
+                const cylLabel = setup.cylinder === 'stock' ? 'Original 50 ccm' : setup.cylinder + ' ccm';
+                return `<div class="rec-setup">
+                    <div class="rec-setup-details">
+                        <span>Zylinder: <strong>${cylLabel}</strong></span>
+                        <span>Vergaser: <strong>${CARB_LABELS[setup.carb]}</strong></span>
+                        <span>Übersetzung: <strong>${setup.front}/${setup.rear}</strong></span>
+                        <span>Auspuff: <strong>${EXHAUST_LABELS[setup.exhaust]}</strong></span>
+                    </div>
+                    <button class="rec-apply-btn" data-card="${index}" data-setup="${setupIdx}">Anwenden</button>
+                </div>`;
+            }).join('')}
+        </div>
+    </div>`;
 }
 
 function applySetup(setup) {
@@ -190,26 +193,16 @@ function findMatchingRec(speed) {
     return RECOMMENDATIONS.findIndex(rec => speed >= rec.min && speed <= rec.max);
 }
 
-function highlightRec(index) {
-    document.querySelectorAll('.rec-card').forEach((card, i) => {
-        card.classList.toggle('rec-card--active', i === index);
-    });
-}
-
 updateExhaustDefaults();
 updateCarbDefault();
 calculateSpeed();
-renderRecommendations();
+renderSetupCard(-1);
 
 document.getElementById('wunschgeschwindigkeit').addEventListener('input', (e) => {
     const val = parseInt(e.target.value);
     if (isNaN(val) || val < 0) {
-        highlightRec(-1);
+        renderSetupCard(-1);
         return;
     }
-    const idx = findMatchingRec(val);
-    highlightRec(idx);
-    if (idx >= 0) {
-        document.querySelectorAll('.rec-card')[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
+    renderSetupCard(findMatchingRec(val));
 });
