@@ -2,6 +2,8 @@
 
 Ein Rechner für die geschätzte Endgeschwindigkeit von Puch Maxi Mofas. Du kannst entweder dein bestehendes Setup berechnen oder einen Vorschlag für eine gewünschte Geschwindigkeit abrufen.
 
+🌐 **Live Demo:** [Mofa Speed Calculator](https://doxe187.github.io/mofa_speed_calculator/)
+
 ---
 
 ## Installation
