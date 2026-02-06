@@ -21,7 +21,7 @@ const CARB_LABELS = ['12 mm', '14 mm', '15 mm', '17 mm', '17.5 mm', '19 mm', '19
 const EXHAUST_LABELS = ['18er', '22er', '28er', '28er Reso'];
 
 const RECOMMENDATIONS = [
-    { label: '35 km/h', min: 0, max: 37, setups: [
+    { label: '35 km/h', min: 25, max: 37, setups: [
         { cylinder: 'stock', carb: 0, front: 13, rear: 45, exhaust: 1 }
     ]},
     { label: '40 km/h', min: 38, max: 42, setups: [
