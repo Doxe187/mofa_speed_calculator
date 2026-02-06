@@ -24,13 +24,61 @@ function updateSpeedDisplay() {
     elements.speedResult.textContent = totalSpeed;
 
     // Warnungen anzeigen
-    const warnings = validateConfiguration(cylinder, cylinderNum, carbIndex, exhaustIndex);
+    const warnings = validateConfiguration(cylinderNum, carbIndex, exhaustIndex, totalSpeed);
     if (warnings.length > 0) {
         elements.warningText.innerHTML = warnings.join('<br>');
         elements.warning.classList.remove('hidden');
     } else {
         elements.warning.classList.add('hidden');
     }
+
+    // Optionen einschränken, um unter 25 km/h zu vermeiden
+    updateAvailableOptions();
+}
+
+function updateAvailableOptions() {
+    const cylinderRaw = elements.zylinder.value;
+    const cylinder = cylinderRaw === 'stock' ? 'stock' : parseInt(cylinderRaw);
+    const carbIndex = parseInt(elements.vergaser.value);
+    const front = parseInt(elements.vorne.value);
+    const rear = parseInt(elements.hinten.value);
+    const exhaustIndex = parseInt(elements.auspuff.value);
+
+    // Prüfe hinteres Ritzel
+    Array.from(elements.hinten.options).forEach(option => {
+        const testRear = parseInt(option.value);
+        const speed = calculateSpeed(cylinder, carbIndex, front, testRear, exhaustIndex);
+        option.disabled = speed < 25;
+    });
+
+    // Prüfe vorderes Ritzel
+    Array.from(elements.vorne.options).forEach(option => {
+        const testFront = parseInt(option.value);
+        const speed = calculateSpeed(cylinder, carbIndex, testFront, rear, exhaustIndex);
+        option.disabled = speed < 25;
+    });
+
+    // Prüfe Vergaser
+    Array.from(elements.vergaser.options).forEach(option => {
+        const testCarbIndex = parseInt(option.value);
+        const speed = calculateSpeed(cylinder, testCarbIndex, front, rear, exhaustIndex);
+        option.disabled = speed < 25;
+    });
+
+    // Prüfe Auspuff
+    Array.from(elements.auspuff.options).forEach(option => {
+        const testExhaustIndex = parseInt(option.value);
+        const speed = calculateSpeed(cylinder, carbIndex, front, rear, testExhaustIndex);
+        option.disabled = speed < 25 || !isValidConfig(cylinder, testExhaustIndex);
+    });
+
+    // Prüfe Zylinder
+    Array.from(elements.zylinder.options).forEach(option => {
+        const testCylinderRaw = option.value;
+        const testCylinder = testCylinderRaw === 'stock' ? 'stock' : parseInt(testCylinderRaw);
+        const speed = calculateSpeed(testCylinder, carbIndex, front, rear, exhaustIndex);
+        option.disabled = speed < 25 || !isValidConfig(testCylinder, exhaustIndex);
+    });
 }
 
 function updateExhaustDefaults() {

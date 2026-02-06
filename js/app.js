@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateExhaustDefaults();
     updateCarbDefault();
     updateSpeedDisplay();
+    updateAvailableOptions();
 
     // Setup Event Listeners
     setupEventListeners();

@@ -30,7 +30,7 @@ function isValidConfig(cylinder, exhaustIndex) {
     return true;
 }
 
-function validateConfiguration(cylinderNum, carbIndex, exhaustIndex) {
+function validateConfiguration(cylinderNum, carbIndex, exhaustIndex, speed) {
     const warnings = [];
 
     if (exhaustIndex === CONFIG.exhaustResoIndex && cylinderNum <= CONFIG.maxCylinderForReso) {
@@ -41,6 +41,10 @@ function validateConfiguration(cylinderNum, carbIndex, exhaustIndex) {
 
     if (cylinderNum <= 70 && carbIndex > CONFIG.carbMaxIndex70cc) {
         warnings.push('Ein Vergaser größer als 19 mm bringt keinen Geschwindigkeitsvorteil.');
+    }
+
+    if (speed < 25) {
+        warnings.push('Diese Konfiguration ist leider nicht passend für ein Töffli (unter 25 km/h)!');
     }
 
     return warnings;
@@ -58,6 +62,10 @@ function findBestSetup(targetSpeed) {
                         if (!isValidConfig(cylinder, exhaustIndex)) continue;
 
                         const speed = calculateSpeed(cylinder, carbIndex, front, rear, exhaustIndex);
+
+                        // Ignoriere Konfigurationen unter 25 km/h (nicht töffli-tauglich)
+                        if (speed < 25) continue;
+
                         const diff = Math.abs(speed - targetSpeed);
 
                         // Bevorzuge Konfigurationen die das Ziel leicht überschreiten
